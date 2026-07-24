@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ふたりの相性診断(無料・生年月日だけ) | ゆびさき占い</title>
-<meta name="description" content="気になる人・恋人・友達との相性を、ふたりの生年月日だけで無料診断。相性スコアとアドバイスつき。登録不要。">
+<meta name="description" content="恋人・片思い・復縁・友達・仕事相手との相性を、ふたりの生年月日だけで無料診断。関係タイプ別のアドバイスつき。登録不要。">
+<meta property="og:title" content="ふたりの相性診断 | ゆびさき占い">
+<meta property="og:description" content="恋人・片思い・復縁…関係タイプ別に相性とアドバイスがわかる無料診断。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knoauktas4499-star.github.io/yubisaki-uranai/aisho.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,19 +21,37 @@
   </header>
 
   <h1>💞 ふたりの相性診断</h1>
-  <p class="lead">ふたりの生年月日を入れるだけ。恋人でも、気になる人でも、友達でも。</p>
+  <p class="lead">ふたりの生年月日と、関係を選ぶだけ。関係に合わせたアドバイスつき。</p>
 
   <div class="card">
     <label for="b1">あなたの生年月日</label>
     <input type="date" id="b1" min="1930-01-01" max="2012-12-31">
     <label for="b2">相手の生年月日</label>
     <input type="date" id="b2" min="1930-01-01" max="2012-12-31">
+    <label for="rel">ふたりの関係</label>
+    <select id="rel">
+      <option value="koibito">恋人</option>
+      <option value="kataomoi">片思い中</option>
+      <option value="fukuen">復縁したい相手</option>
+      <option value="tomodachi">友達</option>
+      <option value="shigoto">仕事の相手</option>
+    </select>
     <button class="go" onclick="showAisho()">相性を診断する</button>
 
     <div class="result" id="result">
-      <div class="score"><span id="r-pct"></span><small> %</small></div>
+      <div class="score"><span id="r-pct">0</span><small> %</small></div>
       <h2 id="r-title" style="text-align:center;"></h2>
       <p id="r-text"></p>
+
+      <div class="cat">
+        <span class="c-emoji">💡</span>
+        <div class="c-body">
+          <div class="c-head"><span id="r-rel-label"></span></div>
+          <p id="r-advice"></p>
+        </div>
+      </div>
+
+      <button class="share" onclick="sharePair()">結果をXでシェア 🕊</button>
 
       <div class="cta">
         <span class="cta-label">この関係、ちゃんと視てほしい人へ</span>
@@ -41,6 +65,7 @@
     <div class="links">
       <a href="index.html">トップ</a>
       <a href="kyou.html">今日の運勢</a>
+      <a href="seiza.html">今週の12星座</a>
       <a href="tarot.html">タロット</a>
       <a href="about.html">サイトについて</a>
     </div>
@@ -50,15 +75,24 @@
 </div>
 <script src="js/fortune.js"></script>
 <script>
+let lastPct = null;
 function showAisho() {
   const b1 = document.getElementById("b1").value;
   const b2 = document.getElementById("b2").value;
+  const rel = document.getElementById("rel").value;
   if (!b1 || !b2) { alert("ふたりの生年月日を入れてください"); return; }
-  const f = aishoUranai(b1, b2);
-  document.getElementById("r-pct").textContent = f.pct;
+  const f = aishoUranai(b1, b2, rel);
+  lastPct = f.pct;
+  countUp(document.getElementById("r-pct"), f.pct);
   document.getElementById("r-title").textContent = f.title;
   document.getElementById("r-text").textContent = f.text;
+  document.getElementById("r-rel-label").textContent = f.relLabel + "へのアドバイス";
+  document.getElementById("r-advice").textContent = f.advice;
   document.getElementById("result").classList.add("show");
+}
+function sharePair() {
+  if (lastPct === null) return;
+  shareX("ふたりの相性は " + lastPct + "% でした💞 #ゆびさき占い");
 }
 </script>
 </body>

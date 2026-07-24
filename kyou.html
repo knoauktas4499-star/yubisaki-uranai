@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>今日の運勢(無料・生年月日でわかる) | ゆびさき占い</title>
-<meta name="description" content="生年月日を入れるだけで今日の運勢を無料診断。運勢スコア・ラッキーカラー・ラッキーアイテムが毎日変わります。登録不要。">
+<meta name="description" content="生年月日を入れるだけで今日の運勢を無料診断。総合運・恋愛運・仕事運・金運とラッキーカラーが毎日変わります。登録不要。">
+<meta property="og:title" content="今日の運勢 | ゆびさき占い">
+<meta property="og:description" content="生年月日を入れるだけ。総合・恋愛・仕事・金運が毎日変わる無料占い。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knoauktas4499-star.github.io/yubisaki-uranai/kyou.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,12 +30,37 @@
 
     <div class="result" id="result">
       <div class="stars" id="r-stars"></div>
-      <div class="score"><span id="r-score"></span><small> 点</small></div>
+      <div class="score"><span id="r-score">0</span><small> 点</small></div>
       <p id="r-main" style="margin-top:14px;"></p>
+
+      <div class="cat">
+        <span class="c-emoji">💗</span>
+        <div class="c-body">
+          <div class="c-head"><span>恋愛運</span><span class="c-stars" id="r-love-s"></span></div>
+          <p id="r-love-t"></p>
+        </div>
+      </div>
+      <div class="cat">
+        <span class="c-emoji">💼</span>
+        <div class="c-body">
+          <div class="c-head"><span>仕事運</span><span class="c-stars" id="r-work-s"></span></div>
+          <p id="r-work-t"></p>
+        </div>
+      </div>
+      <div class="cat">
+        <span class="c-emoji">💰</span>
+        <div class="c-body">
+          <div class="c-head"><span>金運</span><span class="c-stars" id="r-money-s"></span></div>
+          <p id="r-money-t"></p>
+        </div>
+      </div>
+
       <div class="lucky">
         <div><span>ラッキーカラー</span><b id="r-color"></b></div>
         <div><span>ラッキーアイテム</span><b id="r-item"></b></div>
       </div>
+
+      <button class="share" onclick="shareToday()">今日の運勢をXでシェア 🕊</button>
 
       <div class="cta">
         <span class="cta-label">もっと深く知りたい人へ</span>
@@ -42,6 +73,7 @@
   <footer>
     <div class="links">
       <a href="index.html">トップ</a>
+      <a href="seiza.html">今週の12星座</a>
       <a href="aisho.html">相性診断</a>
       <a href="tarot.html">タロット</a>
       <a href="about.html">サイトについて</a>
@@ -52,19 +84,30 @@
 </div>
 <script src="js/fortune.js"></script>
 <script>
+let lastScore = null;
 function showKyou() {
   const b = document.getElementById("birth").value;
   if (!b) { alert("生年月日を入れてください"); return; }
   localStorage.setItem("yubisaki_birth", b);
   const f = kyouUranai(b);
+  lastScore = f.score;
   document.getElementById("r-stars").textContent = f.stars;
-  document.getElementById("r-score").textContent = f.score;
+  countUp(document.getElementById("r-score"), f.score);
   document.getElementById("r-main").textContent = f.main;
+  document.getElementById("r-love-s").textContent = f.love.stars;
+  document.getElementById("r-love-t").textContent = f.love.text;
+  document.getElementById("r-work-s").textContent = f.work.stars;
+  document.getElementById("r-work-t").textContent = f.work.text;
+  document.getElementById("r-money-s").textContent = f.money.stars;
+  document.getElementById("r-money-t").textContent = f.money.text;
   document.getElementById("r-color").textContent = f.color;
   document.getElementById("r-item").textContent = f.item;
   document.getElementById("result").classList.add("show");
 }
-// 前回の生年月日を復元(リピート利用を楽に)
+function shareToday() {
+  if (lastScore === null) return;
+  shareX("今日の運勢は " + lastScore + "点 でした🌙 #ゆびさき占い");
+}
 (function () {
   const saved = localStorage.getItem("yubisaki_birth");
   if (saved) document.getElementById("birth").value = saved;

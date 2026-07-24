@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>タロット1枚引き(無料) | ゆびさき占い</title>
 <meta name="description" content="迷ったときの無料タロット占い。大アルカナ22枚から1枚引いて、今のあなたへのメッセージを受け取ってください。登録不要。">
+<meta property="og:title" content="タロット1枚引き | ゆびさき占い">
+<meta property="og:description" content="迷ったときに1枚。大アルカナ22枚の無料タロット占い。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knoauktas4499-star.github.io/yubisaki-uranai/tarot.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,6 +32,7 @@
     <div class="result" id="result">
       <p id="c-text" style="text-align:left;"></p>
       <button class="go" onclick="draw()" style="margin-top:16px;">もう一度引く</button>
+      <button class="share" onclick="shareTarot()">引いたカードをXでシェア 🕊</button>
 
       <div class="cta" style="text-align:left;">
         <span class="cta-label">カードの意味を深く知りたい人へ</span>
@@ -48,13 +55,19 @@
 </div>
 <script src="js/fortune.js"></script>
 <script>
+let lastCard = null;
 function draw() {
   const c = tarotDraw();
+  lastCard = c;
   document.getElementById("c-emoji").textContent = c.emoji;
   document.getElementById("c-name").textContent = c.name;
   document.getElementById("c-pos").textContent = c.pos;
   document.getElementById("c-text").textContent = "【" + c.name + "・" + c.pos + "】 " + c.text;
   document.getElementById("result").classList.add("show");
+}
+function shareTarot() {
+  if (!lastCard) return;
+  shareX("引いたカードは【" + lastCard.name + "・" + lastCard.pos + "】でした🃏 #ゆびさき占い");
 }
 </script>
 </body>
