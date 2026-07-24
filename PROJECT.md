@@ -31,6 +31,7 @@
 
 - ホスティング: **GitHub Pages(無料)** https://yubisaki-uranai.github.io/yubisaki-uranai/
 - リポジトリ: github.com/yubisaki-uranai/yubisaki-uranai
+- **2026-07-25: GitHubユーザー名を knoauktas4499-star → yubisaki-uranai に変更**(URLからGmail名を排除)。全409ページのcanonical/OGP/sitemap/robotsを新ドメインに更新済み。旧URLは404。Google未登録の段階での変更なのでSEO損失なし
 - 技術: 静的HTML+vanilla JS。外部依存なし。ロジックはNodeでテスト済み(決定性・範囲・順序不変)
 
 ## コンプラ方針
@@ -85,9 +86,7 @@ A8アカウント(メディアID a26030585996)に「ゆびさき占い」を**�
 - /birthday/MM-DD.html … 誕生日366日(性格/恋愛/相性/ラッキー・シード生成)
 - 全ページ: canonical/OGP/FAQ構造化データ/PR表記/ココナラ電話占いCTA。不審文字ゼロ検証済み
 - sitemap.xml = 409URL
-3. **[ユーザー] Google Search Console 登録**(所有権確認)→ sitemap送信
-4. 追加SEO(私): 12星座の個別ページ、タロット各カード解説、占い用語記事
-5. 独自ドメインは**伸びてから**(年1,500円)。最初は無料サブドメインで検証
+- 独自ドメインは**伸びてから**(年1,500円)。今は無料サブドメインで検証中
 
 ## ページ生成の仕組み(再生成する場合)
 
