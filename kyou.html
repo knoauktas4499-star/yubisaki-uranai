@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日の運勢(無料・生年月日でわかる) | ゆびさき占い</title>
+<meta name="description" content="生年月日を入れるだけで今日の運勢を無料診断。運勢スコア・ラッキーカラー・ラッキーアイテムが毎日変わります。登録不要。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <a class="logo" href="index.html">🌙 ゆびさき占い</a>
+  </header>
+
+  <h1>🔮 今日の運勢</h1>
+  <p class="lead">生年月日を入れるだけ。結果は毎日0時に変わります。朝のルーティンにどうぞ。</p>
+
+  <div class="card">
+    <label for="birth">あなたの生年月日</label>
+    <input type="date" id="birth" min="1930-01-01" max="2012-12-31">
+    <button class="go" onclick="showKyou()">今日の運勢を見る</button>
+
+    <div class="result" id="result">
+      <div class="stars" id="r-stars"></div>
+      <div class="score"><span id="r-score"></span><small> 点</small></div>
+      <p id="r-main" style="margin-top:14px;"></p>
+      <div class="lucky">
+        <div><span>ラッキーカラー</span><b id="r-color"></b></div>
+        <div><span>ラッキーアイテム</span><b id="r-item"></b></div>
+      </div>
+
+      <div class="cta">
+        <span class="cta-label">もっと深く知りたい人へ</span>
+        <p>恋愛・仕事・人間関係など、具体的な悩みは「話して視てもらう」のがいちばん早く整理できます。初回無料特典のある電話占いサービスの比較を準備中です。</p>
+        <p class="note">※このサイトはアフィリエイト広告(PR)を利用する予定です</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="index.html">トップ</a>
+      <a href="aisho.html">相性診断</a>
+      <a href="tarot.html">タロット</a>
+      <a href="about.html">サイトについて</a>
+    </div>
+    <div>※占いはエンターテインメントです | © ゆびさき占い</div>
+  </footer>
+
+</div>
+<script src="js/fortune.js"></script>
+<script>
+function showKyou() {
+  const b = document.getElementById("birth").value;
+  if (!b) { alert("生年月日を入れてください"); return; }
+  localStorage.setItem("yubisaki_birth", b);
+  const f = kyouUranai(b);
+  document.getElementById("r-stars").textContent = f.stars;
+  document.getElementById("r-score").textContent = f.score;
+  document.getElementById("r-main").textContent = f.main;
+  document.getElementById("r-color").textContent = f.color;
+  document.getElementById("r-item").textContent = f.item;
+  document.getElementById("result").classList.add("show");
+}
+// 前回の生年月日を復元(リピート利用を楽に)
+(function () {
+  const saved = localStorage.getItem("yubisaki_birth");
+  if (saved) document.getElementById("birth").value = saved;
+})();
+</script>
+</body>
+</html>

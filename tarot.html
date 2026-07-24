@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タロット1枚引き(無料) | ゆびさき占い</title>
+<meta name="description" content="迷ったときの無料タロット占い。大アルカナ22枚から1枚引いて、今のあなたへのメッセージを受け取ってください。登録不要。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <a class="logo" href="index.html">🌙 ゆびさき占い</a>
+  </header>
+
+  <h1>🃏 タロット1枚引き</h1>
+  <p class="lead">目を閉じて、聞きたいことをひとつ思い浮かべてから、カードをタップ。</p>
+
+  <div class="card" style="text-align:center;">
+    <div class="tarot-card" id="card" onclick="draw()">
+      <span id="c-emoji">🌟</span>
+      <span class="cname" id="c-name">タップして引く</span>
+      <span class="cpos" id="c-pos"></span>
+    </div>
+    <div class="result" id="result">
+      <p id="c-text" style="text-align:left;"></p>
+      <button class="go" onclick="draw()" style="margin-top:16px;">もう一度引く</button>
+
+      <div class="cta" style="text-align:left;">
+        <span class="cta-label">カードの意味を深く知りたい人へ</span>
+        <p>1枚引きは「今の流れ」のヒント。恋愛や仕事など具体的な悩みは、プロのタロット鑑定で背景まで視てもらえます。初回無料特典のある電話占いの比較を準備中です。</p>
+        <p class="note">※このサイトはアフィリエイト広告(PR)を利用する予定です</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="index.html">トップ</a>
+      <a href="kyou.html">今日の運勢</a>
+      <a href="aisho.html">相性診断</a>
+      <a href="about.html">サイトについて</a>
+    </div>
+    <div>※占いはエンターテインメントです | © ゆびさき占い</div>
+  </footer>
+
+</div>
+<script src="js/fortune.js"></script>
+<script>
+function draw() {
+  const c = tarotDraw();
+  document.getElementById("c-emoji").textContent = c.emoji;
+  document.getElementById("c-name").textContent = c.name;
+  document.getElementById("c-pos").textContent = c.pos;
+  document.getElementById("c-text").textContent = "【" + c.name + "・" + c.pos + "】 " + c.text;
+  document.getElementById("result").classList.add("show");
+}
+</script>
+</body>
+</html>
