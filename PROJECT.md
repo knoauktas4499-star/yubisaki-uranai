@@ -29,8 +29,8 @@
 - **電話占いヴェルニ**(成約先): 集客の核は悩み別導線(復縁/片思い/不倫/遠距離…)と口コミ・鑑定歴の信頼表示 → 相性診断の関係タイプに反映。将来の紹介記事では「悩み別」で書く
 - **cocoloni**: 無料お試し→本格鑑定の二段階 → 無料ツール→電話占いの流れはこの業界の標準形
 
-- ホスティング: **GitHub Pages(無料)** https://knoauktas4499-star.github.io/yubisaki-uranai/
-- リポジトリ: github.com/knoauktas4499-star/yubisaki-uranai
+- ホスティング: **GitHub Pages(無料)** https://yubisaki-uranai.github.io/yubisaki-uranai/
+- リポジトリ: github.com/yubisaki-uranai/yubisaki-uranai
 - 技術: 静的HTML+vanilla JS。外部依存なし。ロジックはNodeでテスト済み(決定性・範囲・順序不変)
 
 ## コンプラ方針

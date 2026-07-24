@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://knoauktas4499-star.github.io/yubisaki-uranai/sitemap.xml
+Sitemap: https://yubisaki-uranai.github.io/yubisaki-uranai/sitemap.xml

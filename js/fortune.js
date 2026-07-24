@@ -292,6 +292,6 @@ function countUp(el, target, suffix) {
 
 // ---- 共通: Xシェア ----
 function shareX(text) {
-  const url = "https://knoauktas4499-star.github.io/yubisaki-uranai/";
+  const url = "https://yubisaki-uranai.github.io/yubisaki-uranai/";
   window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text + "\n") + "&url=" + encodeURIComponent(url), "_blank");
 }
