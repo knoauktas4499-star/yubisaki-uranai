@@ -248,6 +248,17 @@ button.share:active { transform: scale(0.97); }
 .cta p { margin: 8px 0 0; font-size: 0.88rem; line-height: 1.8; }
 .cta .note { font-size: 0.73rem; color: var(--sub); margin-top: 10px; }
 
+a.cta-btn {
+  display: block; text-align: center; text-decoration: none;
+  margin-top: 14px; padding: 15px;
+  border: 1px solid var(--gold); border-radius: 999px;
+  background: linear-gradient(135deg, rgba(240,220,160,0.18), rgba(203,161,78,0.32));
+  color: var(--gold-lite); font-weight: 600; font-size: 1rem; letter-spacing: 0.06em;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+a.cta-btn:hover { box-shadow: 0 0 22px rgba(203,161,78,0.4); }
+a.cta-btn:active { transform: scale(0.98); }
+
 footer {
   margin-top: 52px; padding-top: 20px;
   border-top: 1px solid var(--panel-line);
