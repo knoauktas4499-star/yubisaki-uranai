@@ -13,7 +13,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-@font-face { font-display: swap; }
+html { overflow-x: hidden; }
 
 body {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "MS PMincho", serif;
@@ -23,6 +23,8 @@ body {
   line-height: 1.95;
   letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* 金の星々(ちらつき) */
@@ -50,8 +52,8 @@ body::after {
   content: "";
   position: fixed;
   top: -180px; left: 50%;
-  width: 460px; height: 460px;
-  margin-left: -230px;
+  width: min(460px, 92vw); height: min(460px, 92vw);
+  margin-left: calc(min(460px, 92vw) / -2);
   z-index: -1;
   border-radius: 50%;
   border: 1px solid rgba(203,161,78,0.16);
