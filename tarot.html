@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
 <title>タロット1枚引き(無料) | ゆびさき占い</title>
 <meta name="description" content="迷ったときの無料タロット占い。大アルカナ22枚から1枚引いて、今のあなたへのメッセージを受け取ってください。登録不要。">
 <meta property="og:title" content="タロット1枚引き | ゆびさき占い">
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://yubisaki-uranai.github.io/yubisaki-uranai/tarot.html">
 <link rel="canonical" href="https://yubisaki-uranai.github.io/yubisaki-uranai/tarot.html">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2355499e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b8402e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,13 +23,15 @@
     <a class="logo" href="index.html">ゆびさき占い</a>
   </header>
 
+  <span class="seclabel" style="margin-top:34px;">Tarot</span>
+
   <h1>タロット1枚引き</h1>
   <p class="lead">目を閉じて、聞きたいことをひとつ思い浮かべてから、カードをタップ。</p>
   <p class="lead"><a href="tarot/index.html">大アルカナ22枚の意味を調べる →</a></p>
 
-  <div class="card" style="text-align:center;">
-    <div class="tarot-card" id="card" onclick="draw()">
-      <span id="c-emoji">🌟</span>
+  <div class="card">
+    <div class="tarot-card" id="card" onclick="draw()" role="button" tabindex="0">
+      <span class="cnum" id="c-num">—</span>
       <span class="cname" id="c-name">タップして引く</span>
       <span class="cpos" id="c-pos"></span>
     </div>
@@ -39,7 +41,7 @@
       <button class="share" onclick="shareTarot()">引いたカードをXでシェア</button>
 
       <div class="cta" style="text-align:left;">
-        <span class="cta-label">カードの意味を深く知りたい人へ</span>
+        <span class="cta-label">Consultation</span>
         <p>1枚引きは「今の流れ」のヒント。恋愛や仕事など具体的な悩みは、プロのタロット鑑定で背景まで視てもらえます。初回最大30分無料のココナラ電話占いから試せます。</p>
         <a class="cta-btn" href="https://px.a8.net/svt/ejp?a8mat=4B88SS+E22K2A+2PEO+BYLJM" rel="nofollow noopener" target="_blank">電話占いココナラを見る（初回最大30分無料）</a>
     <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=4B88SS+E22K2A+2PEO+BYLJM" alt="">
@@ -65,7 +67,7 @@ let lastCard = null;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function paintCard(c) {
-  document.getElementById("c-emoji").textContent = c.emoji;
+  document.getElementById("c-num").textContent = c.roman;
   document.getElementById("c-name").textContent = c.name;
   document.getElementById("c-pos").textContent = c.pos;
 }
@@ -84,9 +86,14 @@ function draw() {
   document.getElementById("c-text").textContent = "【" + c.name + "・" + c.pos + "】 " + c.text;
   document.getElementById("result").classList.add("show");
 }
+// キーボードでも引けるようにする
+document.getElementById("card").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); draw(); }
+});
+
 function shareTarot() {
   if (!lastCard) return;
-  shareX("引いたカードは【" + lastCard.name + "・" + lastCard.pos + "】でした🃏 #ゆびさき占い");
+  shareX("引いたカードは【" + lastCard.name + "・" + lastCard.pos + "】でした #ゆびさき占い");
 }
 </script>
 </body>

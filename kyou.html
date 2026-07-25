@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
 <title>今日の運勢(無料・生年月日でわかる) | ゆびさき占い</title>
 <meta name="description" content="生年月日を入れるだけで今日の運勢を無料診断。総合運・恋愛運・仕事運・金運とラッキーカラーが毎日変わります。登録不要。">
 <meta property="og:title" content="今日の運勢 | ゆびさき占い">
-<meta property="og:description" content="生年月日を入れるだけ。総合・恋愛・仕事・金運が毎日変わる無料占い。">
+<meta property="og:description" content="生年月日から、今日の総合・恋愛・仕事・金運を無料で。毎日0時に変わります。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yubisaki-uranai.github.io/yubisaki-uranai/kyou.html">
 <link rel="canonical" href="https://yubisaki-uranai.github.io/yubisaki-uranai/kyou.html">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2355499e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b8402e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,35 +23,39 @@
     <a class="logo" href="index.html">ゆびさき占い</a>
   </header>
 
+  <span class="seclabel" style="margin-top:34px;">Daily</span>
   <h1>今日の運勢</h1>
-  <p class="lead">生年月日を入れるだけ。結果は毎日0時に変わります。朝のルーティンにどうぞ。</p>
+  <p class="lead">生年月日から、今日一日の流れを総合・恋愛・仕事・金運の4つに分けて見ます。結果が変わるのは毎日0時です。</p>
 
   <div class="card">
-    <label for="birth">あなたの生年月日</label>
-    <input type="date" id="birth" min="1930-01-01" max="2012-12-31">
+    <p class="fieldlabel" id="lbl-birth">あなたの生年月日</p>
+    <div class="datefield" role="group" aria-labelledby="lbl-birth">
+      <span class="dsel"><select id="b-y" aria-label="生まれた年"></select><i>年</i></span>
+      <span class="dsel"><select id="b-m" aria-label="生まれた月"></select><i>月</i></span>
+      <span class="dsel"><select id="b-d" aria-label="生まれた日"></select><i>日</i></span>
+    </div>
+    <p class="formerror" id="err" role="alert" hidden></p>
+
     <button class="go" onclick="showKyou()">今日の運勢を見る</button>
 
     <div class="result" id="result">
       <div class="stars" id="r-stars"></div>
-      <div class="score"><span id="r-score">0</span><small> 点</small></div>
-      <p id="r-main" style="margin-top:14px;"></p>
+      <div class="score"><span id="r-score">0</span><small>点</small></div>
+      <p id="r-main" style="margin-top:16px;"></p>
 
       <div class="cat">
-        <span class="c-emoji">💗</span>
         <div class="c-body">
           <div class="c-head"><span>恋愛運</span><span class="c-stars" id="r-love-s"></span></div>
           <p id="r-love-t"></p>
         </div>
       </div>
       <div class="cat">
-        <span class="c-emoji">💼</span>
         <div class="c-body">
           <div class="c-head"><span>仕事運</span><span class="c-stars" id="r-work-s"></span></div>
           <p id="r-work-t"></p>
         </div>
       </div>
       <div class="cat">
-        <span class="c-emoji">💰</span>
         <div class="c-body">
           <div class="c-head"><span>金運</span><span class="c-stars" id="r-money-s"></span></div>
           <p id="r-money-t"></p>
@@ -66,8 +70,8 @@
       <button class="share" onclick="shareToday()">今日の運勢をXでシェア</button>
 
       <div class="cta">
-        <span class="cta-label">もっと深く知りたい人へ</span>
-        <p>恋愛・仕事・人間関係など、具体的な悩みは「話して視てもらう」のがいちばん早く整理できます。初回最大30分無料のココナラ電話占いから試せます。</p>
+        <span class="cta-label">Consultation</span>
+        <p>恋愛・仕事・人間関係など、具体的な悩みは話して視てもらうほうが早く整理できます。初回最大30分無料のココナラ電話占いから試せます。</p>
         <a class="cta-btn" href="https://px.a8.net/svt/ejp?a8mat=4B88SS+E22K2A+2PEO+BYLJM" rel="nofollow noopener" target="_blank">電話占いココナラを見る（初回最大30分無料）</a>
     <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=4B88SS+E22K2A+2PEO+BYLJM" alt="">
     <p class="note">※本ページはアフィリエイト広告（PR）を含みます</p>
@@ -83,18 +87,39 @@
       <a href="tarot.html">タロット</a>
       <a href="about.html">サイトについて</a>
     </div>
-    <div>※占いはエンターテインメントです | © ゆびさき占い</div>
+    <div>※占いはエンターテインメントです ｜ © ゆびさき占い</div>
   </footer>
 
 </div>
 <script src="js/fortune.js"></script>
 <script>
+const ySel = document.getElementById("b-y");
+const mSel = document.getElementById("b-m");
+const dSel = document.getElementById("b-d");
+const errEl = document.getElementById("err");
 let lastScore = null;
+
+fillBirthSelects(ySel, mSel, dSel);
+
+function setError(msg) {
+  errEl.textContent = msg;
+  errEl.hidden = false;
+  document.getElementById("result").classList.remove("show");
+}
+function clearError() { errEl.hidden = true; errEl.textContent = ""; }
+
 function showKyou() {
-  const b = document.getElementById("birth").value;
-  if (!b) { alert("生年月日を入れてください"); return; }
-  localStorage.setItem("yubisaki_birth", b);
-  const f = kyouUranai(b);
+  const raw = readBirthSelects(ySel, mSel, dSel);
+  if (raw === "" || raw === "incomplete") {
+    setError("生年月日を、年・月・日すべて選んでください。");
+    return;
+  }
+  const chk = parseBirth(raw);
+  if (!chk.ok) { setError(chk.message); return; }   // 例: 2月31日 / 未来の日付
+  clearError();
+
+  localStorage.setItem("yubisaki_birth", chk.key);
+  const f = kyouUranai(chk.key);
   lastScore = f.score;
   document.getElementById("r-stars").textContent = f.stars;
   countUp(document.getElementById("r-score"), f.score);
@@ -111,11 +136,12 @@ function showKyou() {
 }
 function shareToday() {
   if (lastScore === null) return;
-  shareX("今日の運勢は " + lastScore + "点 でした🌙 #ゆびさき占い");
+  shareX("今日の運勢は " + lastScore + "点 でした #ゆびさき占い");
 }
+// 前回入れた生年月日を復元する
 (function () {
   const saved = localStorage.getItem("yubisaki_birth");
-  if (saved) document.getElementById("birth").value = saved;
+  if (saved) writeBirthSelects(ySel, mSel, dSel, saved);
 })();
 </script>
 </body>

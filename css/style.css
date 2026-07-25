@@ -1,88 +1,60 @@
 @charset "UTF-8";
 /* ============================================================
-   ゆびさき占い — Design System v3
-   ニュートラル基調 × くすみアクセント / サンセリフ / フラット
-   ライト・ダーク両対応
+   ゆびさき占い — Design System v4（雑誌・エディトリアル型）
+
+   実在サイト6件(北欧暮らしの道具店 / ほぼ日 / 中川政七商店 / note /
+   VOGUE JAPAN / The New Yorker)を計測した結果に合わせて組み直した。
+     - 影: 5/6サイトがゼロ        → 影を一切使わない
+     - グラデ: 5/6サイトがゼロ    → グラデーションを一切使わない
+     - 角丸: 4〜8px(VOGUEは0)     → 4px のみ
+     - 区切り: 1px の薄い罫線が主役 → 罫線で構造を作る
+     - 見出し: weight 400〜600が主 → 明朝の見出し＋ゴシック本文
    ============================================================ */
 
-/* ---- トークン ------------------------------------------------ */
 :root {
   color-scheme: light dark;
 
-  /* 面 */
-  --bg:        #faf8f5;
-  --surface:   #ffffff;
-  --surface-2: #f4f2ee;
-  --line:      #e9e5df;
-  --line-soft: #f1eee9;
+  --paper:    #ffffff;
+  --paper-2:  #f5f4f2;   /* セクションの帯 */
+  --paper-3:  #faf9f8;
 
-  /* 文字 */
-  --ink:  #1f1d26;
-  --ink-2:#403d4a;
-  --sub:  #6a6575;   /* accent-soft 上でも AA(4.5:1)を満たす明度 */
+  --ink:      #1a1a1a;
+  --ink-2:    #444444;
+  --sub:      #6f6f6f;   /* 白地で 5.7:1 */
 
-  /* アクセント（くすみバイオレット） */
-  --accent:      #55499e;
-  --accent-hov:  #453a86;
+  --line:     #e4e3e1;
+  --line-2:   #d2d0cd;
+  --rule:     #1a1a1a;   /* 見出し下の太罫 */
+
+  --accent:      #b8402e;   /* 朱 */
   --accent-ink:  #ffffff;
-  --accent-soft: #f0edfa;
-  --accent-line: #ddd6f4;
+  --accent-weak: #f6efed;
 
-  /* サブアクセント（テラコッタ）: 星・スコア。白/淡色地で AA を満たす濃さ */
-  --warm:      #a15537;
-  --warm-soft: #fbefe8;
+  --r: 4px;
 
-  /* 背景オーラ */
-  --aura-1: rgba(140, 122, 240, 0.20);
-  --aura-2: rgba(240, 165, 125, 0.18);
-
-  /* 影 */
-  --sh-1: 0 1px 2px rgba(31, 29, 38, 0.04);
-  --sh-2: 0 1px 2px rgba(31, 29, 38, 0.04), 0 12px 28px -18px rgba(31, 29, 38, 0.28);
-  --sh-3: 0 2px 6px rgba(31, 29, 38, 0.06), 0 18px 40px -20px rgba(31, 29, 38, 0.34);
-
-  /* 形 */
-  --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 18px;
-  --r-xl: 22px;
-
-  /* 旧バージョン互換（生成ページのインラインstyleが参照している） */
-  --gold:      var(--accent);
-  --gold-lite: var(--accent);
-  --gold-deep: var(--accent-hov);
-  --bg2:       var(--bg);
-  --panel:     var(--surface);
-  --panel-line:var(--line);
+  --sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium",
+          "Yu Gothic", YuGothic, "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP",
+           "Times New Roman", serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:        #131217;
-    --surface:   #1c1a22;
-    --surface-2: #23212b;
-    --line:      #2e2b37;
-    --line-soft: #262430;
+    --paper:    #121212;
+    --paper-2:  #1b1b1b;
+    --paper-3:  #171717;
 
-    --ink:  #edebf0;
-    --ink-2:#cfcbd8;
-    --sub:  #9c96a8;
+    --ink:      #ededed;
+    --ink-2:    #c9c9c9;
+    --sub:      #9d9d9d;
 
-    --accent:      #a99cff;
-    --accent-hov:  #bcb1ff;
-    --accent-ink:  #1a1626;
-    --accent-soft: #241f36;
-    --accent-line: #3a3352;
+    --line:     #2c2c2c;
+    --line-2:   #3a3a3a;
+    --rule:     #ededed;
 
-    --warm:      #e0a184;
-    --warm-soft: #2c2019;
-
-    --aura-1: rgba(126, 105, 230, 0.22);
-    --aura-2: rgba(200, 120, 85, 0.14);
-
-    --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --sh-2: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -18px rgba(0, 0, 0, 0.8);
-    --sh-3: 0 2px 6px rgba(0, 0, 0, 0.5), 0 18px 40px -20px rgba(0, 0, 0, 0.9);
+    --accent:      #e07a67;
+    --accent-ink:  #17100e;
+    --accent-weak: #241a18;
   }
 }
 
@@ -90,683 +62,579 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-  overflow-x: hidden;   /* clip 非対応ブラウザ用のフォールバック */
+  overflow-x: hidden;
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
-               "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI",
-               "Yu Gothic", Meiryo, system-ui, sans-serif;
+  font-family: var(--sans);
   font-size: 16px;
   line-height: 1.9;
   font-feature-settings: "palt" 1;
-  letter-spacing: 0.01em;
   color: var(--ink);
-  background: var(--bg);
+  background: var(--paper);
   min-height: 100vh;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
-/* 上部のやわらかいオーラ（静止・アニメーションなし） */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 540px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(58% 62% at 12% 0%,  var(--aura-1), transparent 72%),
-    radial-gradient(48% 52% at 88% 8%,  var(--aura-2), transparent 72%);
-}
+img { max-width: 100%; height: auto; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-img { max-width: 100%; height: auto; display: inline-block; }
-
-::selection { background: var(--accent-soft); color: var(--ink); }
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* ---- レイアウト ---------------------------------------------- */
 .wrap {
-  max-width: 680px;
+  max-width: 660px;
   margin: 0 auto;
-  padding: 0 20px 72px;
-  position: relative;
+  padding: 0 22px 80px;
 }
 
-/* ---- ヘッダー ------------------------------------------------ */
+/* ---- マストヘッド（雑誌の題字） ------------------------------- */
 header.site {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 0 18px;
-  margin-bottom: 6px;
+  padding: 22px 0 14px;
   border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
 }
-
 header.site .logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 1.02rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
   color: var(--ink);
   text-decoration: none;
-}
-header.site .logo::before {
-  content: "";
-  width: 19px; height: 19px;
-  flex: none;
-  background-color: var(--accent);
-  -webkit-mask: var(--mark-moon) center / contain no-repeat;
-          mask: var(--mark-moon) center / contain no-repeat;
-  transition: background-color .16s ease;
-}
-/* マーク（三日月）。mask 用のデータURI */
-:root {
-  --mark-moon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z'/%3E%3C/svg%3E");
 }
 header.site .logo:hover { color: var(--accent); }
 header.site .tagline { display: none; }
 
-/* ---- ヒーロー（トップ） -------------------------------------- */
-.hero { padding: 34px 0 26px; }
-.hero .eyebrow {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+/* ---- 英字の小ラベル（雑誌の常套句） --------------------------- */
+.eyebrow, .seclabel, .cta-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.8;
   color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 4px 12px;
-  line-height: 1.6;
-  margin-bottom: 16px;
+  text-transform: uppercase;
 }
+
+/* ---- ヒーロー（トップ） -------------------------------------- */
+.hero { padding: 40px 0 30px; }
+.hero .eyebrow { margin-bottom: 14px; }
 .hero h1 {
-  font-size: clamp(1.65rem, 6.4vw, 2.15rem);
-  line-height: 1.42;
-  letter-spacing: 0.01em;
-  font-weight: 700;
-  text-align: left;
-  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 7vw, 2.35rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+  margin: 0 0 16px;
   color: var(--ink);
 }
 .hero p {
-  color: var(--sub);
+  color: var(--ink-2);
   font-size: 0.94rem;
-  line-height: 1.85;
-  max-width: 34em;
+  line-height: 1.95;
+  max-width: 32em;
+}
+.hero .dateline {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--sub);
 }
 
 /* ---- 見出し -------------------------------------------------- */
 h1 {
-  font-size: clamp(1.35rem, 5.2vw, 1.6rem);
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
-  margin: 30px 0 8px;
-  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 5.6vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  margin: 34px 0 10px;
 }
 
 h2 {
-  font-size: 1.02rem;
-  font-weight: 700;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
-  margin: 26px 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+  margin: 30px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-2);
   color: var(--ink);
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-}
-h2::before {
-  content: "";
-  width: 3px;
-  height: 0.92em;
-  flex: none;
-  border-radius: 2px;
-  background: var(--accent);
-  transform: translateY(0.08em);
 }
 .card > h2:first-child { margin-top: 0; }
 
-h3 { font-size: 0.95rem; font-weight: 700; margin: 20px 0 6px; color: var(--ink); }
-
-/* 結果ブロックの見出しはアクセントバーなし・中央 */
-.result > h2 {
-  display: block;
-  text-align: center;
-  font-size: 1.14rem;
-  margin: 8px 0 12px;
-}
-.result > h2::before { display: none; }
-
-/* 小見出しラベル（恋愛 / 仕事 など） */
-b.minihead {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 2px 11px;
-  line-height: 1.75;
-  margin-bottom: 3px;
-}
+h3 { font-size: 0.94rem; font-weight: 600; margin: 20px 0 6px; }
 
 p.lead {
   color: var(--sub);
-  font-size: 0.92rem;
-  line-height: 1.85;
-  margin: 0 0 22px;
+  font-size: 0.9rem;
+  line-height: 1.95;
+  margin: 0 0 24px;
 }
 
 p { color: var(--ink-2); }
 .card p, .cta p { font-size: 0.93rem; }
-
-b, strong { font-weight: 700; color: var(--ink); }
-.hl { font-weight: 700; color: var(--accent); }
-
+b, strong { font-weight: 600; color: var(--ink); }
 a { color: var(--accent); }
 
-hr.rule {
-  height: 1px;
-  border: none;
-  background: var(--line);
-  margin: 20px 0;
-}
+hr.rule { height: 1px; border: none; background: var(--line); margin: 22px 0; }
 
-/* ---- カード -------------------------------------------------- */
+/* ---- セクション区切り(帯) ------------------------------------- */
+.band {
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 34px -22px;
+  padding: 26px 22px;
+}
+.band > :first-child { margin-top: 0; }
+.band > :last-child  { margin-bottom: 0; }
+
+/* ---- カード = 枠だけ（影なし） --------------------------------- */
 .card {
-  background: var(--surface);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: var(--r-lg);
+  border-radius: var(--r);
   padding: 22px 20px;
-  margin: 16px 0;
-  box-shadow: var(--sh-2);
-}
-
-/* ---- ツールカード（グリッド） --------------------------------- */
-.tools {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
   margin: 18px 0;
 }
-@media (min-width: 540px) {
-  .tools { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ---- 目次型リスト（旧ツールカード） --------------------------- */
+.tools {
+  margin: 8px 0 28px;
+  border-top: 1px solid var(--line);
+}
+@media (min-width: 560px) {
+  .tools { display: grid; grid-template-columns: 1fr 1fr; column-gap: 26px; }
 }
 
 a.toolcard {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas:
-    "icon name chev"
-    "icon desc chev";
-  align-items: center;
-  column-gap: 13px;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: 12px;
+  padding: 15px 2px 14px;
+  border-bottom: 1px solid var(--line);
   text-decoration: none;
   color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  padding: 15px 14px;
-  box-shadow: var(--sh-1);
-  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  transition: background .14s ease;
 }
-a.toolcard:hover {
-  border-color: var(--accent-line);
-  box-shadow: var(--sh-3);
-  transform: translateY(-2px);
-}
-a.toolcard:active { transform: translateY(0); }
-
-a.toolcard .t-emoji {
-  grid-area: icon;
-  width: 42px; height: 42px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.22rem;
-  line-height: 1;
-  border-radius: 12px;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-}
+a.toolcard:hover { background: var(--paper-3); }
+/* 絵文字アイコンは使わない（実在サイトで使っている例がない） */
+a.toolcard .t-emoji { display: none; }
 a.toolcard .t-name {
-  grid-area: name;
+  grid-column: 1;
   font-size: 0.98rem;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
   color: var(--ink);
 }
 a.toolcard .t-desc {
-  grid-area: desc;
-  font-size: 0.78rem;
-  line-height: 1.65;
+  grid-column: 1;
+  font-size: 0.79rem;
+  line-height: 1.75;
   color: var(--sub);
 }
 a.toolcard::after {
-  content: "";
-  grid-area: chev;
-  width: 16px; height: 16px;
-  flex: none;
-  background: var(--sub);
-  opacity: .55;
-  -webkit-mask: var(--mark-chev) center / 16px 16px no-repeat;
-          mask: var(--mark-chev) center / 16px 16px no-repeat;
-  transition: opacity .18s ease, transform .18s ease;
+  content: "→";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: var(--line-2);
+  font-size: 0.9rem;
+  transition: color .14s ease, transform .14s ease;
 }
-a.toolcard:hover::after { opacity: 1; background: var(--accent); transform: translateX(2px); }
-
-:root {
-  --mark-chev: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
-}
-
-/* 説明のないカード（12星座一覧など）でも縦位置を整える */
-a.toolcard .t-desc:empty { display: none; }
+a.toolcard:hover::after { color: var(--accent); transform: translateX(3px); }
 
 /* ---- フォーム ------------------------------------------------ */
-label {
+label, .fieldlabel {
   display: block;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--sub);
-  margin: 14px 0 7px;
-  letter-spacing: 0.02em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin: 18px 0 8px;
 }
-.card > label:first-child { margin-top: 0; }
+.card > label:first-child, .card > .fieldlabel:first-child { margin-top: 0; }
 
-input[type="date"], select {
-  width: 100%;
-  padding: 12px 13px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--line);
-  background: var(--surface-2);
+/* 生年月日: 年/月/日 のプルダウン */
+.datefield { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.datefield .dsel { display: flex; align-items: baseline; gap: 4px; }
+.datefield .dsel i {
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--sub);
+}
+.datefield select { width: auto; min-width: 4.6em; }
+.datefield .dsel:first-child select { min-width: 6.2em; }
+
+select, input[type="date"] {
+  padding: 10px 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  background: var(--paper);
   color: var(--ink);
   font-size: 1rem;
   font-family: inherit;
   line-height: 1.5;
-  transition: border-color .15s ease, box-shadow .15s ease;
 }
-input[type="date"]:focus, select:focus {
+select:focus, input[type="date"]:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
 }
+select:not(.datefield select) { width: 100%; }
+
+/* 入力エラー（占いは必ず結果が出るわけではない、と分かる表示） */
+.formerror {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-weak);
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+.formerror[hidden] { display: none; }
 
 /* ---- ボタン -------------------------------------------------- */
 button.go {
   display: block;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 22px;
   padding: 14px 18px;
   border: none;
-  border-radius: var(--r-md);
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: 1rem;
-  font-weight: 700;
+  border-radius: var(--r);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.96rem;
+  font-weight: 600;
   font-family: inherit;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   cursor: pointer;
-  box-shadow: var(--sh-1);
-  transition: background .16s ease, transform .16s ease, box-shadow .16s ease;
+  transition: background .14s ease;
 }
-button.go:hover { background: var(--accent-hov); box-shadow: var(--sh-2); transform: translateY(-1px); }
-button.go:active { transform: translateY(0); }
+button.go:hover { background: var(--accent); }
 
 button.share {
   display: block;
   width: 100%;
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: var(--surface);
+  margin-top: 16px;
+  padding: 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  background: transparent;
   color: var(--sub);
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-size: 0.85rem;
   font-family: inherit;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: color .16s ease, border-color .16s ease, background .16s ease;
+  transition: color .14s ease, border-color .14s ease;
 }
-button.share:hover { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+button.share:hover { color: var(--ink); border-color: var(--ink); }
 
-/* 次のアクション（旧 .logo 流用リンクの置き換え） */
-.nextnav {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin: 18px 0;
-}
-@media (min-width: 480px) { .nextnav { grid-template-columns: 1fr 1fr; } }
-
+/* 次のアクション */
+.nextnav { margin: 24px 0; border-top: 1px solid var(--line); }
 a.pill {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 13px 16px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--accent-line);
-  background: var(--accent-soft);
-  color: var(--accent);
+  gap: 10px;
+  padding: 14px 2px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  text-align: center;
-  line-height: 1.5;
-  transition: background .16s ease, transform .16s ease;
 }
-a.pill:hover { background: var(--surface); transform: translateY(-1px); }
-a.pill:active { transform: translateY(0); }
+a.pill::after { content: "→"; color: var(--line-2); }
+a.pill:hover { color: var(--accent); }
+a.pill:hover::after { color: var(--accent); }
 
-/* ---- 結果表示 ------------------------------------------------ */
-.result { display: none; margin-top: 22px; }
-.result.show { display: block; animation: reveal .45s cubic-bezier(.22,.8,.3,1); }
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
-}
+/* ---- 結果 ---------------------------------------------------- */
+.result { display: none; margin-top: 26px; padding-top: 24px; border-top: 2px solid var(--rule); }
+.result.show { display: block; }
 
 .score {
   text-align: center;
-  font-size: 3.4rem;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-family: var(--serif);
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
 }
 .score small {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--sub);
-  margin-left: 3px;
-  letter-spacing: 0;
+  margin-left: 4px;
 }
 .stars {
   text-align: center;
-  font-size: 1.15rem;
-  letter-spacing: 0.28em;
-  color: var(--warm);
-  margin-bottom: 2px;
+  font-size: 1rem;
+  letter-spacing: 0.34em;
+  color: var(--accent);
+}
+.result > h2 {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 10px 0 14px;
 }
 
-/* ラッキー要素 */
 .lucky {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 16px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .lucky div {
   text-align: center;
-  background: var(--surface-2);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--r-sm);
-  padding: 11px 6px;
+  padding: 12px 6px;
+  border-left: 1px solid var(--line);
 }
+.lucky div:first-child { border-left: none; }
 .lucky div span {
   display: block;
   color: var(--sub);
   font-size: 0.68rem;
-  letter-spacing: 0.03em;
-  line-height: 1.5;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
 }
 .lucky div b {
   display: block;
-  color: var(--ink);
-  font-size: 0.92rem;
-  font-weight: 700;
-  margin-top: 3px;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 2px;
+  line-height: 1.6;
 }
 
-/* カテゴリ別運勢 */
+/* カテゴリ別（罫線区切りの記事風） */
 .cat {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--surface-2);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--r-md);
-  padding: 14px;
-  margin-top: 10px;
+  display: block;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
 }
-.cat .c-emoji {
-  width: 34px; height: 34px;
-  flex: none;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem;
-  line-height: 1;
-  border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-.cat .c-body { flex: 1; min-width: 0; }
+.cat .c-emoji { display: none; }
+.cat .c-body { min-width: 0; }
 .cat .c-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  gap: 10px;
   font-size: 0.84rem;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--ink);
 }
-.cat .c-head .c-stars { color: var(--warm); font-size: 0.78rem; letter-spacing: 0.14em; }
-.cat p { font-size: 0.85rem; margin-top: 4px; line-height: 1.8; color: var(--ink-2); }
+.cat .c-head .c-stars { color: var(--accent); font-size: 0.78rem; letter-spacing: 0.2em; }
+.cat p { font-size: 0.87rem; margin-top: 5px; line-height: 1.9; color: var(--ink-2); }
 
 /* ---- 12星座グリッド ------------------------------------------- */
 .seiza-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  margin-top: 18px;
 }
 @media (min-width: 480px) { .seiza-grid { grid-template-columns: repeat(4, 1fr); } }
-
 .seiza-grid button {
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  padding: 11px 4px;
+  border: none;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 12px 4px;
   color: var(--ink-2);
-  cursor: pointer;
-  font-size: 0.78rem;
-  line-height: 1.55;
   font-family: inherit;
-  transition: border-color .15s ease, background .15s ease, color .15s ease;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: background .14s ease, color .14s ease;
 }
-.seiza-grid button:hover { border-color: var(--accent-line); background: var(--accent-soft); }
-.seiza-grid button.active {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-.seiza-grid button.active .z-date { color: var(--accent-ink); opacity: .75; }
-.seiza-grid .z-emoji { font-size: 1.2rem; display: block; line-height: 1.3; }
-.seiza-grid .z-date { font-size: 0.6rem; color: var(--sub); display: block; }
+.seiza-grid button:hover { background: var(--paper-2); }
+.seiza-grid button.active { background: var(--ink); color: var(--paper); }
+.seiza-grid button.active .z-date { color: var(--paper); opacity: .7; }
+.seiza-grid .z-emoji { display: none; }
+.seiza-grid .z-date { display: block; font-size: 0.6rem; color: var(--sub); }
 
 .weekrange {
-  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   color: var(--sub);
-  font-size: 0.82rem;
   margin-top: 2px;
-  letter-spacing: 0.02em;
 }
 
 /* ---- タロットカード ------------------------------------------- */
 .tarot-card {
-  width: 168px;
+  width: 164px;
   aspect-ratio: 63 / 100;
-  min-height: 250px;   /* aspect-ratio 非対応時に潰れないように */
-  margin: 22px auto;
-  border-radius: var(--r-lg);
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.10), transparent 60%),
-    linear-gradient(165deg, #4b4290 0%, #2b2550 62%, #1d1938 100%);
-  border: 1px solid rgba(255,255,255,.16);
-  box-shadow: var(--sh-3);
-  color: #f3f1fb;
+  min-height: 246px;
+  margin: 26px auto;
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 16px 12px;
-  font-size: 2.6rem;
+  gap: 6px;
+  padding: 18px 14px;
+  font-size: 2rem;
   cursor: pointer;
   user-select: none;
-  transition: transform .25s ease, box-shadow .25s ease;
+  position: relative;
 }
-.tarot-card:hover { transform: translateY(-3px); }
-.tarot-card.flip { animation: flip .55s cubic-bezier(.3,.7,.3,1); }
+.tarot-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.tarot-card.flip { animation: flip .5s ease; }
 @keyframes flip {
-  0%   { transform: perspective(900px) rotateY(0deg)   scale(1); }
-  45%  { transform: perspective(900px) rotateY(86deg)  scale(.95); }
-  55%  { transform: perspective(900px) rotateY(-86deg) scale(.95); }
-  100% { transform: perspective(900px) rotateY(0deg)   scale(1); }
+  0%   { transform: perspective(900px) rotateY(0deg); }
+  45%  { transform: perspective(900px) rotateY(86deg); }
+  55%  { transform: perspective(900px) rotateY(-86deg); }
+  100% { transform: perspective(900px) rotateY(0deg); }
+}
+.tarot-card .cnum {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--accent);
 }
 .tarot-card .cname {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-top: 8px;
-  letter-spacing: 0.04em;
-  line-height: 1.5;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-top: 10px;
   text-align: center;
+  line-height: 1.6;
 }
-.tarot-card .cpos { font-size: 0.74rem; color: rgba(243,241,251,.86); line-height: 1.5; }
+.tarot-card .cpos {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--sub);
+  line-height: 1.6;
+}
 
 /* ---- CTA（アフィリエイト枠） ---------------------------------- */
 .cta {
-  margin-top: 24px;
-  padding: 20px 18px;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-line);
-  border-radius: var(--r-lg);
+  margin-top: 30px;
+  padding: 22px 20px;
+  border: 1px solid var(--line-2);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--r);
+  background: var(--paper-3);
 }
-.cta .cta-label {
-  display: inline-block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  background: var(--surface);
-  border: 1px solid var(--accent-line);
-  border-radius: 999px;
-  padding: 3px 10px;
-  line-height: 1.7;
-  margin-bottom: 10px;
-}
-.cta p { margin: 0; font-size: 0.89rem; line-height: 1.85; color: var(--ink-2); }
-/* PR表記(景表法・ステマ規制)。装飾で埋もれさせず、濃さも大きさも確実に読める水準にする */
-.cta .note {
-  font-size: 0.82rem;
-  color: var(--ink-2);
-  margin-top: 12px;
-  line-height: 1.75;
-}
-
+.cta .cta-label { margin-bottom: 10px; }
+.cta p { margin: 0; font-size: 0.89rem; line-height: 1.95; color: var(--ink-2); }
 a.cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 14px;
+  display: block;
+  margin-top: 16px;
   padding: 15px 18px;
   border: none;
-  border-radius: var(--r-md);
+  border-radius: var(--r);
   background: var(--accent);
   color: var(--accent-ink);
-  font-weight: 700;
-  font-size: 0.96rem;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  box-shadow: var(--sh-2);
-  transition: background .16s ease, transform .16s ease, box-shadow .16s ease;
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity .14s ease;
 }
-a.cta-btn::after {
-  content: "";
-  width: 15px; height: 15px;
-  flex: none;
-  background: var(--accent-ink);
-  -webkit-mask: var(--mark-chev) center / 15px 15px no-repeat;
-          mask: var(--mark-chev) center / 15px 15px no-repeat;
-  transition: transform .16s ease;
-}
-a.cta-btn:hover { background: var(--accent-hov); box-shadow: var(--sh-3); transform: translateY(-1px); }
-a.cta-btn:hover::after { transform: translateX(3px); }
-a.cta-btn:active { transform: translateY(0); }
+a.cta-btn:hover { opacity: .86; }
 
-/* ---- 誕生日一覧の日付リンク ----------------------------------- */
-.daylist { line-height: 2.5; }
+/* PR表記(景表法・ステマ規制)。装飾に埋もれさせない */
+.cta .note {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+/* ---- 誕生日一覧 ----------------------------------------------- */
+.daylist { line-height: 2.4; }
 a.daylink {
   display: inline-block;
-  min-width: 2.6em;
+  min-width: 2.5em;
   text-align: center;
-  padding: 2px 6px;
-  margin: 2px 3px 2px 0;
-  border-radius: 8px;
+  padding: 1px 5px;
+  margin: 2px 2px 2px 0;
   border: 1px solid var(--line);
-  background: var(--surface-2);
+  border-radius: var(--r);
   color: var(--ink-2);
   font-size: 0.82rem;
-  line-height: 1.7;
+  line-height: 1.8;
   text-decoration: none;
-  transition: background .14s ease, color .14s ease, border-color .14s ease;
+  transition: border-color .14s ease, color .14s ease;
 }
-a.daylink:hover { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+a.daylink:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---- 小見出しラベル ------------------------------------------- */
+b.minihead {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.hl { font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--accent); }
 
 /* ---- フッター ------------------------------------------------ */
 footer {
-  margin-top: 48px;
+  margin-top: 56px;
   padding-top: 22px;
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--rule);
   font-size: 0.78rem;
   color: var(--sub);
-  line-height: 1.9;
+  line-height: 2;
 }
 footer a { color: var(--sub); text-decoration: none; }
 footer a:hover { color: var(--accent); }
-footer .links { margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
-footer .links a { line-height: 1.9; }
+footer .links { margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 2px 18px; }
 
-.notice { font-size: 0.78rem; color: var(--sub); margin-top: 14px; line-height: 1.8; }
-.note   { font-size: 0.75rem; color: var(--sub); line-height: 1.7; }
+.notice { font-size: 0.79rem; color: var(--sub); margin-top: 16px; line-height: 1.85; }
+.note   { font-size: 0.79rem; color: var(--sub); line-height: 1.8; }
 
 /* ---- モーション配慮 ------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
 }
 
-/* ---- 狭い端末の詰め ------------------------------------------- */
+/* ---- 狭い端末 ------------------------------------------------- */
 @media (max-width: 359px) {
-  .wrap { padding-left: 14px; padding-right: 14px; }
-  .card { padding: 18px 15px; }
-  .cta  { padding: 18px 15px; }
-  a.toolcard { padding: 13px 12px; column-gap: 10px; }
-  a.toolcard .t-emoji { width: 38px; height: 38px; font-size: 1.1rem; }
-  .score { font-size: 2.9rem; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
+  .band { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+  .card, .cta { padding: 18px 15px; }
+  .score { font-size: 3.2rem; }
+  .datefield { gap: 4px; }
+  .datefield select { min-width: 4.1em; padding: 10px 6px; }
+  .datefield .dsel:first-child select { min-width: 5.6em; }
 }

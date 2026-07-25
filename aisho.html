@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
 <title>ふたりの相性診断(無料・生年月日だけ) | ゆびさき占い</title>
 <meta name="description" content="恋人・片思い・復縁・友達・仕事相手との相性を、ふたりの生年月日だけで無料診断。関係タイプ別のアドバイスつき。登録不要。">
 <meta property="og:title" content="ふたりの相性診断 | ゆびさき占い">
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://yubisaki-uranai.github.io/yubisaki-uranai/aisho.html">
 <link rel="canonical" href="https://yubisaki-uranai.github.io/yubisaki-uranai/aisho.html">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2355499e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b8402e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,14 +23,25 @@
     <a class="logo" href="index.html">ゆびさき占い</a>
   </header>
 
+  <span class="seclabel" style="margin-top:34px;">Compatibility</span>
   <h1>ふたりの相性診断</h1>
-  <p class="lead">ふたりの生年月日と、関係を選ぶだけ。関係に合わせたアドバイスつき。</p>
+  <p class="lead">ふたりの生年月日と、いまの関係を選んでください。関係に合わせたアドバイスをつけて出します。</p>
 
   <div class="card">
-    <label for="b1">あなたの生年月日</label>
-    <input type="date" id="b1" min="1930-01-01" max="2012-12-31">
-    <label for="b2">相手の生年月日</label>
-    <input type="date" id="b2" min="1930-01-01" max="2012-12-31">
+    <p class="fieldlabel" id="lbl-b1">あなたの生年月日</p>
+    <div class="datefield" role="group" aria-labelledby="lbl-b1">
+      <span class="dsel"><select id="a-y" aria-label="あなたの生まれた年"></select><i>年</i></span>
+      <span class="dsel"><select id="a-m" aria-label="あなたの生まれた月"></select><i>月</i></span>
+      <span class="dsel"><select id="a-d" aria-label="あなたの生まれた日"></select><i>日</i></span>
+    </div>
+
+    <p class="fieldlabel" id="lbl-b2">相手の生年月日</p>
+    <div class="datefield" role="group" aria-labelledby="lbl-b2">
+      <span class="dsel"><select id="c-y" aria-label="相手の生まれた年"></select><i>年</i></span>
+      <span class="dsel"><select id="c-m" aria-label="相手の生まれた月"></select><i>月</i></span>
+      <span class="dsel"><select id="c-d" aria-label="相手の生まれた日"></select><i>日</i></span>
+    </div>
+
     <label for="rel">ふたりの関係</label>
     <select id="rel">
       <option value="koibito">恋人</option>
@@ -39,15 +50,16 @@
       <option value="tomodachi">友達</option>
       <option value="shigoto">仕事の相手</option>
     </select>
+
+    <p class="formerror" id="err" role="alert" hidden></p>
     <button class="go" onclick="showAisho()">相性を診断する</button>
 
     <div class="result" id="result">
-      <div class="score"><span id="r-pct">0</span><small> %</small></div>
-      <h2 id="r-title" style="text-align:center;"></h2>
+      <div class="score"><span id="r-pct">0</span><small>%</small></div>
+      <h2 id="r-title"></h2>
       <p id="r-text"></p>
 
       <div class="cat">
-        <span class="c-emoji">💡</span>
         <div class="c-body">
           <div class="c-head"><span id="r-rel-label"></span></div>
           <p id="r-advice"></p>
@@ -57,8 +69,8 @@
       <button class="share" onclick="sharePair()">結果をXでシェア</button>
 
       <div class="cta">
-        <span class="cta-label">この関係、ちゃんと視てほしい人へ</span>
-        <p>「相手がどう思っているか」「これからどうなるか」は、プロに話しながら視てもらうと一気に整理されます。初回最大30分無料のココナラ電話占いから試せます。</p>
+        <span class="cta-label">Consultation</span>
+        <p>「相手がどう思っているか」「これからどうなるか」は、プロに話しながら視てもらうと整理がつきやすくなります。初回最大30分無料のココナラ電話占いから試せます。</p>
         <a class="cta-btn" href="https://px.a8.net/svt/ejp?a8mat=4B88SS+E22K2A+2PEO+BYLJM" rel="nofollow noopener" target="_blank">電話占いココナラを見る（初回最大30分無料）</a>
     <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=4B88SS+E22K2A+2PEO+BYLJM" alt="">
     <p class="note">※本ページはアフィリエイト広告（PR）を含みます</p>
@@ -74,19 +86,43 @@
       <a href="tarot.html">タロット</a>
       <a href="about.html">サイトについて</a>
     </div>
-    <div>※占いはエンターテインメントです | © ゆびさき占い</div>
+    <div>※占いはエンターテインメントです ｜ © ゆびさき占い</div>
   </footer>
 
 </div>
 <script src="js/fortune.js"></script>
 <script>
+const A = { y: document.getElementById("a-y"), m: document.getElementById("a-m"), d: document.getElementById("a-d") };
+const C = { y: document.getElementById("c-y"), m: document.getElementById("c-m"), d: document.getElementById("c-d") };
+const errEl = document.getElementById("err");
 let lastPct = null;
+
+fillBirthSelects(A.y, A.m, A.d);
+fillBirthSelects(C.y, C.m, C.d);
+
+function setError(msg) {
+  errEl.textContent = msg;
+  errEl.hidden = false;
+  document.getElementById("result").classList.remove("show");
+}
+
+function readOne(sel, who) {
+  const raw = readBirthSelects(sel.y, sel.m, sel.d);
+  if (raw === "" || raw === "incomplete") return { ok: false, message: who + "の生年月日を、年・月・日すべて選んでください。" };
+  const p = parseBirth(raw);
+  if (!p.ok) return { ok: false, message: who + "の生年月日: " + p.message };
+  return p;
+}
+
 function showAisho() {
-  const b1 = document.getElementById("b1").value;
-  const b2 = document.getElementById("b2").value;
+  const p1 = readOne(A, "あなた");
+  if (!p1.ok) { setError(p1.message); return; }
+  const p2 = readOne(C, "相手");
+  if (!p2.ok) { setError(p2.message); return; }
+  errEl.hidden = true;
+
   const rel = document.getElementById("rel").value;
-  if (!b1 || !b2) { alert("ふたりの生年月日を入れてください"); return; }
-  const f = aishoUranai(b1, b2, rel);
+  const f = aishoUranai(p1.key, p2.key, rel);
   lastPct = f.pct;
   countUp(document.getElementById("r-pct"), f.pct);
   document.getElementById("r-title").textContent = f.title;
@@ -97,8 +133,13 @@ function showAisho() {
 }
 function sharePair() {
   if (lastPct === null) return;
-  shareX("ふたりの相性は " + lastPct + "% でした💞 #ゆびさき占い");
+  shareX("ふたりの相性は " + lastPct + "% でした #ゆびさき占い");
 }
+// 「今日の運勢」で入れた生年月日があれば、あなた側に入れておく
+(function () {
+  const saved = localStorage.getItem("yubisaki_birth");
+  if (saved) writeBirthSelects(A.y, A.m, A.d, saved);
+})();
 </script>
 </body>
 </html>

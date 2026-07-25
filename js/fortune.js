@@ -43,6 +43,77 @@ function weekRangeLabel() {
 function pick(r, arr) { return arr[Math.floor(r() * arr.length)]; }
 function starStr(n) { return "★".repeat(n) + "☆".repeat(5 - n); }
 
+// ---- 生年月日の検証 ----
+// 入力を素通しでハッシュにかけると、2月31日でも未来の日付でも空でも点数が出てしまう。
+// 実在する過去の日付だけを受け付け、それ以外は結果を作らない。
+const BIRTH_MIN_YEAR = 1900;
+
+function pad2(n) { return n < 10 ? "0" + n : String(n); }
+
+function todayYmd() {
+  const d = new Date();
+  return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+}
+
+/* 戻り値: { ok:true, y, m, d, key } / { ok:false, reason, message } */
+function parseBirth(value) {
+  if (typeof value !== "string" || value.trim() === "") {
+    return { ok: false, reason: "empty", message: "生年月日を入れてください。" };
+  }
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(value.trim());
+  if (!m) {
+    return { ok: false, reason: "format", message: "年・月・日をすべて入れてください。" };
+  }
+  const y = +m[1], mo = +m[2], da = +m[3];
+  if (mo < 1 || mo > 12) {
+    return { ok: false, reason: "month", message: mo + "月という月はありません。" };
+  }
+  if (da < 1) {
+    return { ok: false, reason: "day", message: "日付が正しくありません。" };
+  }
+  // 実在チェック: Date に入れて同じ年月日で戻ってこなければ存在しない日
+  const dt = new Date(y, mo - 1, da);
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== da) {
+    return { ok: false, reason: "nodate", message: y + "年" + mo + "月" + da + "日は存在しない日付です。" };
+  }
+  if (y < BIRTH_MIN_YEAR) {
+    return { ok: false, reason: "tooOld", message: BIRTH_MIN_YEAR + "年より前の日付は占えません。" };
+  }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (dt.getTime() > today.getTime()) {
+    return { ok: false, reason: "future", message: "未来の日付は占えません。" };
+  }
+  return { ok: true, y: y, m: mo, d: da, key: y + "-" + pad2(mo) + "-" + pad2(da) };
+}
+
+/* 生年月日は 年/月/日 の3プルダウンで受ける。
+   日は常に1〜31を出すので「2月31日」も選べてしまうが、それは parseBirth が弾いて理由を出す。
+   (type="date" だとブラウザが黙って丸めるので、検証が働いていることが利用者に見えない) */
+function fillBirthSelects(ySel, mSel, dSel) {
+  const thisYear = new Date().getFullYear();
+  let y = '<option value="">----</option>';
+  for (let v = thisYear; v >= BIRTH_MIN_YEAR; v--) y += '<option value="' + v + '">' + v + "</option>";
+  ySel.innerHTML = y;
+  let m = '<option value="">--</option>';
+  for (let v = 1; v <= 12; v++) m += '<option value="' + v + '">' + v + "</option>";
+  mSel.innerHTML = m;
+  let d = '<option value="">--</option>';
+  for (let v = 1; v <= 31; v++) d += '<option value="' + v + '">' + v + "</option>";
+  dSel.innerHTML = d;
+}
+function readBirthSelects(ySel, mSel, dSel) {
+  if (!ySel.value && !mSel.value && !dSel.value) return "";
+  if (!ySel.value || !mSel.value || !dSel.value) return "incomplete";
+  return ySel.value + "-" + pad2(+mSel.value) + "-" + pad2(+dSel.value);
+}
+function writeBirthSelects(ySel, mSel, dSel, ymd) {
+  const p = parseBirth(ymd);
+  if (!p.ok) return false;
+  ySel.value = String(p.y); mSel.value = String(p.m); dSel.value = String(p.d);
+  return true;
+}
+
 // ---- テキストプール(すべてオリジナル文・断定/不安煽りなし) ----
 const POOL_MAIN = [
   "小さな「やってみようかな」が当たりの日。迷ったら軽い方を選んで大丈夫。",
@@ -122,7 +193,9 @@ const LUCKY_ITEM = ["あたたかい飲み物", "イヤホン", "ハンカチ", 
 
 // ---- 今日の運勢(4カテゴリ) ----
 function kyouUranai(birth) {
-  const r = rng(seedFrom(birth + "|" + todayKey()));
+  const p = parseBirth(birth);
+  if (!p.ok) return null;   // 不正な入力では結果を作らない
+  const r = rng(seedFrom(p.key + "|" + todayKey()));
   const score = 60 + Math.floor(r() * 41); // 60-100
   const starsN = score >= 92 ? 5 : score >= 82 ? 4 : score >= 72 ? 3 : 2;
   const catStar = () => 2 + Math.floor(r() * 4); // 2-5
@@ -189,7 +262,9 @@ const AISHO_REL = {
   },
 };
 function aishoUranai(b1, b2, rel) {
-  const key = [b1, b2].sort().join("|");
+  const p1 = parseBirth(b1), p2 = parseBirth(b2);
+  if (!p1.ok || !p2.ok) return null;   // 不正な入力では結果を作らない
+  const key = [p1.key, p2.key].sort().join("|");
   const r = rng(seedFrom("aisho|" + key));
   const pct = 48 + Math.floor(r() * 51); // 48-98
   const band = AISHO_BAND.find((b) => pct >= b.min);
@@ -272,11 +347,18 @@ const TAROT = [
   { name: "審判", emoji: "📯", up: "もう一度チャンスが来る暗示。あのとき諦めたこと、再挑戦の時期。", rev: "過去を振り返りすぎ。教訓だけ持って、荷物は置いていこう。" },
   { name: "世界", emoji: "🌍", up: "ひと区切りの完成。ちゃんと「できた」と自分に言ってあげて。", rev: "あと一歩で完成のサイン。最後のピースは意外と近くに。" },
 ];
+// 大アルカナの番号(0〜21)。絵文字ではなくこの数字をカード面に出す
+const TAROT_ROMAN = ["0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                     "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI"];
+
 function tarotDraw() {
   const i = Math.floor(Math.random() * TAROT.length);
   const up = Math.random() < 0.65;
   const c = TAROT[i];
-  return { name: c.name, emoji: c.emoji, pos: up ? "正位置" : "逆位置", text: up ? c.up : c.rev };
+  return {
+    num: i, roman: TAROT_ROMAN[i], name: c.name, emoji: c.emoji,
+    pos: up ? "正位置" : "逆位置", text: up ? c.up : c.rev
+  };
 }
 
 // ---- 共通: スコアのカウントアップ演出 ----

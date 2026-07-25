@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131217" media="(prefers-color-scheme: dark)">
-<title>ゆびさき占い | 3秒で今日がちょっと分かる無料占い</title>
-<meta name="description" content="登録不要・無料で遊べる占いサイト。生年月日でわかる今日の運勢、今週の12星座占い、ふたりの相性診断、タロット1枚引き。3秒で今日がちょっと分かる。">
-<meta property="og:title" content="ゆびさき占い | 3秒で今日がちょっと分かる">
-<meta property="og:description" content="今日の運勢・12星座・相性診断・タロット。登録不要のぜんぶ無料占い。">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+<title>ゆびさき占い | 無料の占いサイト（今日の運勢・12星座・相性・タロット）</title>
+<meta name="description" content="登録不要・無料の占いサイト。生年月日でわかる今日の運勢、毎週月曜に変わる12星座占い、ふたりの相性診断、タロット1枚引き。誕生日366日と大アルカナ22枚の解説も。">
+<meta property="og:title" content="ゆびさき占い | 無料の占いサイト">
+<meta property="og:description" content="今日の運勢・12星座・相性診断・タロット。登録不要で無料。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yubisaki-uranai.github.io/yubisaki-uranai/">
 <link rel="canonical" href="https://yubisaki-uranai.github.io/yubisaki-uranai/">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2355499e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b8402e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ゆびさき占い","url":"https://yubisaki-uranai.github.io/yubisaki-uranai/","description":"登録不要・無料で遊べる占いサイト。今日の運勢、12星座占い、相性診断、タロット。","inLanguage":"ja"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ゆびさき占い","url":"https://yubisaki-uranai.github.io/yubisaki-uranai/","description":"登録不要・無料の占いサイト。今日の運勢、12星座占い、相性診断、タロット。","inLanguage":"ja"}</script>
 </head>
 <body>
 <div class="wrap">
@@ -25,70 +25,61 @@
   </header>
 
   <section class="hero">
-    <span class="eyebrow">登録不要・ぜんぶ無料</span>
-    <h1>3秒で、今日がちょっと分かる無料占い</h1>
-    <p>生年月日を入れるだけの今日の運勢、毎週月曜に変わる12星座、ふたりの相性、タロット1枚引き。アプリも会員登録もいりません。</p>
+    <span class="eyebrow">Free Fortune Telling</span>
+    <h1>今日のことも、この先のことも。</h1>
+    <p>生年月日でわかる今日の運勢、毎週月曜に変わる12星座、ふたりの相性、タロットの1枚引き。会員登録もアプリも要りません。</p>
+    <p class="dateline" id="today"></p>
   </section>
 
-  <h2>占いをえらぶ</h2>
-
+  <span class="seclabel">01 — 占う</span>
   <div class="tools">
     <a class="toolcard" href="kyou.html">
-      <span class="t-emoji">🔮</span>
       <div class="t-name">今日の運勢</div>
-      <div class="t-desc">総合・恋愛・仕事・金運とラッキーカラーが毎日変わります</div>
+      <div class="t-desc">総合・恋愛・仕事・金運を4つに分けて。毎日0時に変わります</div>
     </a>
     <a class="toolcard" href="seiza.html">
-      <span class="t-emoji">⭐</span>
       <div class="t-name">今週の12星座占い</div>
-      <div class="t-desc">今週のテーマとラッキーアクション。毎週月曜に更新</div>
+      <div class="t-desc">今週のテーマとひとつの行動。毎週月曜に更新</div>
     </a>
     <a class="toolcard" href="aisho.html">
-      <span class="t-emoji">💞</span>
       <div class="t-name">ふたりの相性診断</div>
-      <div class="t-desc">恋人・片思い・復縁・友達・仕事相手。関係タイプ別</div>
+      <div class="t-desc">恋人・片思い・復縁・友達・仕事相手。関係ごとに助言を変えています</div>
     </a>
     <a class="toolcard" href="tarot.html">
-      <span class="t-emoji">🃏</span>
       <div class="t-name">タロット1枚引き</div>
-      <div class="t-desc">迷ったときに1枚。今のあなたへのメッセージを</div>
+      <div class="t-desc">大アルカナ22枚から1枚。正位置と逆位置で読み方が変わります</div>
     </a>
   </div>
 
-  <h2>じっくり読む</h2>
-
-  <div class="tools">
-    <a class="toolcard" href="birthday/index.html">
-      <span class="t-emoji">🎂</span>
-      <div class="t-name">誕生日占い（366日）</div>
-      <div class="t-desc">生まれた日でわかる性格・恋愛・相性・ラッキーカラー</div>
-    </a>
-    <a class="toolcard" href="seiza/index.html">
-      <span class="t-emoji">♈</span>
-      <div class="t-name">12星座の性格・相性</div>
-      <div class="t-desc">星座別の性格・恋愛・仕事・金運をくわしく解説</div>
-    </a>
-    <a class="toolcard" href="tarot/index.html">
-      <span class="t-emoji">📖</span>
-      <div class="t-name">タロットの意味（22枚）</div>
-      <div class="t-desc">大アルカナ22枚。正位置・逆位置、恋愛と仕事の読み方</div>
-    </a>
-    <a class="toolcard" href="about.html">
-      <span class="t-emoji">📝</span>
-      <div class="t-name">サイトについて</div>
-      <div class="t-desc">運営方針・免責事項・広告（PR）とプライバシー</div>
-    </a>
+  <div class="band">
+    <span class="seclabel">02 — 読む</span>
+    <div class="tools" style="margin-bottom:0;">
+      <a class="toolcard" href="birthday/index.html">
+        <div class="t-name">誕生日占い 366日</div>
+        <div class="t-desc">生まれた日ごとの性格・恋愛・相性。1月1日から12月31日まで</div>
+      </a>
+      <a class="toolcard" href="seiza/index.html">
+        <div class="t-name">12星座の性格と相性</div>
+        <div class="t-desc">星座別に、性格・恋愛・仕事・金運を一通り</div>
+      </a>
+      <a class="toolcard" href="tarot/index.html">
+        <div class="t-name">タロット大アルカナ 22枚</div>
+        <div class="t-desc">1枚ずつの意味。正位置・逆位置、恋愛と仕事の読み方</div>
+      </a>
+      <a class="toolcard" href="about.html">
+        <div class="t-name">このサイトについて</div>
+        <div class="t-desc">運営方針・免責事項・広告（PR）とプライバシー</div>
+      </a>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>ゆびさき占いについて</h2>
-    <p>
-      会員登録なし・ぜんぶ無料で、すきま時間にさくっと遊べる占いサイトです。
-      朝の運勢チェックに、週はじめの星座占いに、気になるあの人との相性に。
-      入力した生年月日はブラウザの中だけで処理され、どこにも送信されません。
-    </p>
-    <p class="notice">※当サイトの占いはエンターテインメントです。結果は楽しむための参考としてご利用ください。</p>
-  </div>
+  <h2>ゆびさき占いについて</h2>
+  <p>
+    会員登録なしで使える占いサイトです。朝の運勢確認に、週のはじめの星座占いに、
+    気になる人との相性に。入力した生年月日はブラウザの中だけで計算していて、
+    どこにも送信していません。
+  </p>
+  <p class="notice">※当サイトの占いはエンターテインメントです。結果は楽しむための参考としてご利用ください。</p>
 
   <footer>
     <div class="links">
@@ -103,5 +94,13 @@
   </footer>
 
 </div>
+<script>
+(function () {
+  const d = new Date();
+  const w = ["日", "月", "火", "水", "木", "金", "土"][d.getDay()];
+  document.getElementById("today").textContent =
+    d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日（" + w + "）";
+})();
+</script>
 </body>
 </html>

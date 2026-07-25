@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131217" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
 <title>今週の12星座占い(無料・毎週月曜更新) | ゆびさき占い</title>
 <meta name="description" content="12星座の今週の運勢を無料でチェック。今週のテーマとラッキーアクションつき。毎週月曜に自動更新。登録不要。">
 <meta property="og:title" content="今週の12星座占い | ゆびさき占い">
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://yubisaki-uranai.github.io/yubisaki-uranai/seiza.html">
 <link rel="canonical" href="https://yubisaki-uranai.github.io/yubisaki-uranai/seiza.html">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2355499e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b8402e'/%3E%3Cpath d='M22.9 19.4a.9.9 0 0 0-1-.14 6.6 6.6 0 0 1-2.77.6 6.68 6.68 0 0 1-6.68-6.64 7 7 0 0 1 .2-1.64.9.9 0 0 0-1.2-1.06 8.32 8.32 0 1 0 11.5 9.6.9.9 0 0 0-.05-.72z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,6 +22,8 @@
   <header class="site">
     <a class="logo" href="index.html">ゆびさき占い</a>
   </header>
+
+  <span class="seclabel" style="margin-top:34px;">Weekly</span>
 
   <h1>今週の12星座占い</h1>
   <p class="weekrange" id="range"></p>
@@ -32,7 +34,7 @@
 
     <div class="result" id="result">
       <div class="stars" id="r-stars" style="margin-top:18px;"></div>
-      <h2 id="r-name" style="text-align:center;"></h2>
+      <h2 id="r-name"></h2>
       <p id="r-text"></p>
       <div class="lucky">
         <div><span>今週のラッキーアクション</span><b id="r-action"></b></div>
@@ -41,7 +43,7 @@
       <button class="share" onclick="shareSeiza()">今週の運勢をXでシェア</button>
 
       <div class="cta">
-        <span class="cta-label">じっくり視てほしい週は</span>
+        <span class="cta-label">Consultation</span>
         <p>「今週どう動くべきか」を自分の状況に合わせて知りたいときは、プロの鑑定が近道です。初回最大30分無料のココナラ電話占いから試せます。</p>
         <a class="cta-btn" href="https://px.a8.net/svt/ejp?a8mat=4B88SS+E22K2A+2PEO+BYLJM" rel="nofollow noopener" target="_blank">電話占いココナラを見る（初回最大30分無料）</a>
     <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=4B88SS+E22K2A+2PEO+BYLJM" alt="">
@@ -82,14 +84,14 @@ function show(i, btn) {
   lastSeiza = f;
   localStorage.setItem("yubisaki_seiza", i);
   document.getElementById("r-stars").textContent = f.stars;
-  document.getElementById("r-name").textContent = f.emoji + " " + f.name;
+  document.getElementById("r-name").textContent = f.name;
   document.getElementById("r-text").textContent = f.text;
   document.getElementById("r-action").textContent = f.action;
   document.getElementById("result").classList.add("show");
 }
 function shareSeiza() {
   if (!lastSeiza) return;
-  shareX(lastSeiza.name + "の今週の運勢 " + lastSeiza.stars + " ⭐ #ゆびさき占い");
+  shareX(lastSeiza.name + "の今週の運勢 " + lastSeiza.stars + " #ゆびさき占い");
 }
 // 前回選んだ星座を自動表示(リピーターはワンタップ不要)
 (function () {
