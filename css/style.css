@@ -117,6 +117,8 @@ header.site .tagline { display: none; }
   color: var(--accent);
   text-transform: uppercase;
 }
+/* セクションの区切りは色地ではなく余白で示す（帯はPC幅で浮いた箱に見えたため廃止） */
+.seclabel { margin-top: 42px; }
 
 /* ---- ヒーロー（トップ） -------------------------------------- */
 .hero { padding: 40px 0 30px; }
@@ -182,17 +184,6 @@ b, strong { font-weight: 600; color: var(--ink); }
 a { color: var(--accent); }
 
 hr.rule { height: 1px; border: none; background: var(--line); margin: 22px 0; }
-
-/* ---- セクション区切り(帯) ------------------------------------- */
-.band {
-  background: var(--paper-2);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin: 34px -22px;
-  padding: 26px 22px;
-}
-.band > :first-child { margin-top: 0; }
-.band > :last-child  { margin-bottom: 0; }
 
 /* ---- カード = 枠だけ（影なし） --------------------------------- */
 .card {
@@ -686,7 +677,6 @@ footer .links { margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 2px 18
 /* ---- 狭い端末 ------------------------------------------------- */
 @media (max-width: 359px) {
   .wrap { padding-left: 16px; padding-right: 16px; }
-  .band { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
   .card, .cta { padding: 18px 15px; }
   .score { font-size: 3.2rem; }
   .datefield { gap: 4px; }
