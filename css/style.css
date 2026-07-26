@@ -660,6 +660,12 @@ a.daylink:hover { background: var(--ink); border-color: var(--ink); color: var(-
   line-height: 1.8;
   word-break: break-all;
 }
+/* メールリンクは指で押せる高さを確保する */
+.deflist dd a {
+  display: inline-block;
+  padding: 4px 0;
+  line-height: 1.6;
+}
 @media (min-width: 480px) {
   .deflist { display: grid; grid-template-columns: 7.5em 1fr; }
   .deflist dt { padding: 12px 0; border-bottom: 1px solid var(--line); }
