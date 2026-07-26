@@ -639,6 +639,58 @@ a.daylink {
 }
 a.daylink:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+/* ---- 定義リスト（運営者情報） --------------------------------- */
+.deflist {
+  margin: 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.deflist dt {
+  padding: 11px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--sub);
+}
+.deflist dd {
+  margin: 0;
+  padding: 0 0 11px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  line-height: 1.8;
+  word-break: break-all;
+}
+@media (min-width: 480px) {
+  .deflist { display: grid; grid-template-columns: 7.5em 1fr; }
+  .deflist dt { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .deflist dd { padding: 12px 0; }
+}
+
+/* ---- 箇条書き ------------------------------------------------- */
+.bullets {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+.bullets li {
+  position: relative;
+  padding: 6px 0 6px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  line-height: 1.8;
+}
+.bullets li:last-child { border-bottom: none; }
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 1.05em;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+
 /* ---- 小見出しラベル ------------------------------------------- */
 b.minihead {
   display: block;
