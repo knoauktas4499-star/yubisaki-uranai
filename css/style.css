@@ -107,6 +107,23 @@ header.site .logo {
 header.site .logo:hover { color: var(--accent); }
 header.site .tagline { display: none; }
 
+/* ---- パンくず -------------------------------------------------- */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 7px;
+  margin: 14px 0 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  line-height: 1.9;
+  color: var(--sub);
+}
+.crumbs a { color: var(--sub); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); text-decoration: underline; }
+.crumbs .sep { color: var(--line-2); }
+.crumbs [aria-current] { color: var(--ink); }
+
 /* ---- 英字の小ラベル（雑誌の常套句） --------------------------- */
 .eyebrow, .seclabel, .cta-label {
   display: block;
