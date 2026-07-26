@@ -162,10 +162,21 @@ A8アカウント(メディアID a26030585996)に「ゆびさき占い」を**�
   - 全ページ検証OK(リンク/ビーコン/rel/PR = NG 0)
 - **導線完成**: サイトで占う → CTA「電話占いココナラを見る」→ 初回鑑定 → 16,000円
 
+## Google Search Console(2026-07-26 登録完了)
+
+- プロパティ: **URLプレフィックス** `https://yubisaki-uranai.github.io/yubisaki-uranai/`
+- 所有権確認: **完了**(HTMLタグ方式)。`index.html` の
+  `<meta name="google-site-verification" content="7vxCqTAzhiDFGtLuRY4BpbpQZmm1hv3yMrIBzFh0LOY">`
+  を消すと確認が外れるので**削除しないこと**
+- サイトマップ: `sitemap.xml`(410URL)を送信済み。送信直後のステータスは「取得できませんでした・最終読み込み日時なし」= まだ読みに来ていない状態。サイトマップ自体は 200 / application/xml / BOMなし / 名前空間正常 / プロパティ外URL0 / 重複0 を確認済み
+- **トップページはすでに Google にインデックス登録済み**だった(URL検査で確認)。想定と違い、検索エンジンには既に拾われていた
+- 確認ファイル方式(googleXXXX.html)は使っていない。ファイルのダウンロードを伴うため
+
+**robots.txt について**: `/yubisaki-uranai/robots.txt` に置いているが、クローラが読むのは**ドメイン直下**(`yubisaki-uranai.github.io/robots.txt`)のみ。つまり現状の robots.txt は実質無効。全許可の内容なので害はなく、Sitemap 行の役割は Search Console への直接送信で代替済み。独自ドメインに移すときに解消する。
+
 ## 次のステップ
 
-1. **[ユーザー] Google Search Console 登録**(所有権確認)→ sitemap送信 = 検索登録を早める
-2. **[ユーザー] A8「広告掲載URL管理」にサイトURL提出**(ココナラ側の掲載確認用。任意だが推奨)
+1. **[ユーザー] A8「広告掲載URL管理」にサイトURL提出**(ココナラ側の掲載確認用。任意だが推奨)
 3. 他4案件(ヴェルニ等)の審査が通ったら、案件を増やす/入れ替える(私)
 4. 追加SEO(私): ~~12星座個別ページ~~完了 / ~~タロット22枚解説~~完了 / 次候補=占い用語記事、誕生石・数秘など
 
